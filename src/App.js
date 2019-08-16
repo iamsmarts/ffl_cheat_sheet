@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import RANKINGS from './data/rankings'
+import Header from './components/Header'
 import List from './components/List'
+
 
 class App extends Component {
   state = {
@@ -11,7 +13,8 @@ class App extends Component {
   componentDidMount(){
     this.setState({rankings:{...RANKINGS}})
   }
-  setList = ({title}) => {
+  setList = (title) => {
+    console.log('anything', title);
     this.setState(
       {
         activeList:this.state.rankings[title],
@@ -30,8 +33,8 @@ class App extends Component {
       return <h2 key={key} onClick={() => this.setList({title})}>{title}</h2>
     })
     return (
-      <div>
-        {titles}
+      <div className="ui container">
+        <Header navLinks={headers} positionSelection={this.setList}/>
         <List rankingList={this.state.activeList} rankingTitle={this.state.activeTitle}/>
       </div>
       );
